@@ -38,16 +38,16 @@ def show_all_tickets():
     for ticket in Tickets.all_tickets:
         print(ticket)
         
-def respond_to_ticket():
+def user_respond_to_ticket():
     print("Responding to ticket...")
     ticket_id = int(input("What is the ticket ID? "))
     response = input("What is your response? ")
     for ticket in Tickets.all_tickets:
         if ticket.ticketID == ticket_id:
-            ticket.responses.append(response)
+            ticket.user_responses.append(response)
             print("Response added successfully.")
             print("Ticket Summary - \nName: {}\nEmail: {}\nStaff ID: {}\nDescription: {}\nResponses: {}".format(
-                ticket.name, ticket.email, ticket.staffID, ticket.description, ticket.responses
+                ticket.name, ticket.email, ticket.staffID, ticket.description, ticket.user_responses
             ))
             break
     else:
@@ -72,7 +72,7 @@ if role == "1":
             show_all_tickets()
 
         if user_input == "3":
-            respond_to_ticket()
+            user_respond_to_ticket()
             
         if user_input == "4":
             print("Re-opening resolved ticket...")
