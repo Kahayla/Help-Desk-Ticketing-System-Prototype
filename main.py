@@ -10,7 +10,7 @@ class Tickets:
         self.status = "Open"
         self.ticketID = Tickets.ticket_counter
         self.user_responses = []
-        self.it_responses = []
+        self.internal_responses = []
         Tickets.ticket_counter += 1
         Tickets.all_tickets.append(self)
         
@@ -31,6 +31,19 @@ def submit_ticket(staffID):
         new_ticket.name, new_ticket.email, new_ticket.staffID, new_ticket.description
     ))
     print("Ticket submitted successfully.")
+
+# def password_change(staffID,name,description):
+#     if "password change" in description.lower():
+#         new_password = staffID[:2]+name[:3]
+
+def password_change(ticketID,staffID,name):
+    for ticket in Tickets:
+        if ticket.ticketID == ticketID and "password change" in ticket.description.lower() :
+            new_password = staffID[:2]+name[:3]
+            response = "Here is your new password: " + new_password
+            ticket.user_responses.append(response)
+            ticket.status = "Resolved"
+    
     
 def show_all_tickets(staffID):
     print("Showing all tickets...")
@@ -57,6 +70,7 @@ def user_respond_to_ticket():
 
 def main():
     while True:
+
         role = None
         staff_id = None
         print(f"Role: {role}, Staff ID: {staff_id}")
@@ -66,7 +80,7 @@ def main():
 
         if role == "1":
             while True:
-                print("Please select one of the following options: \n0: Log out \n1: Submit helpdesk ticket \n2: Show all tickets \n3: Respond to ticket \n4: Re-open resolved ticket \n5: Show ticket statistics")
+                print("Please select one of the following options: \n0: Log out \n1: Submit helpdesk ticket \n2: Show all tickets \n3: Respond to ticket")
 
                 user_input = input("What would you like to do? ")
 
@@ -82,12 +96,6 @@ def main():
 
                 if user_input == "3":
                     user_respond_to_ticket()
-
-                if user_input == "4":
-                    print("Re-opening resolved ticket...")
-
-                if user_input == "5":
-                    print("Showing ticket statistics...")
 
                 if user_input == "help":
                     print("Please select one of the following options: \n0: Log out \n1: Submit helpdesk ticket \n2: Show all tickets \n3: Respond to ticket \n4: Re-open resolved ticket \n5: Show ticket statistics")
