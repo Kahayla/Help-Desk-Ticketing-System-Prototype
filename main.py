@@ -74,13 +74,13 @@ def update_ticket():
                 print("Ticket statuses\n1: Open\n2: In progress\n3: Awaiting customer response\n4: Resolved")
                 change_status_to = int(input("Select the number to update the ticket status: "))
                 
-                if change_status_to == "1":
+                if change_status_to == 1:
                     ticket.status = "Open"
-                elif change_status_to == "2":
+                elif change_status_to == 2:
                     ticket.status = "In progress"
-                elif change_status_to == "3":
+                elif change_status_to == 3:
                     ticket.status = "Awaiting customer response"
-                elif change_status_to == "4": 
+                elif change_status_to == 4: 
                     ticket.status = "Resolved"
                 else:
                     print("Invalid status selection.")
@@ -91,12 +91,11 @@ def update_ticket():
             break
     else:
         print(f"Ticket with ID {ticket_id} not found.")
+        
 def show_all_tickets():
     for ticket in Tickets.all_tickets:
         print(ticket)
     
-    
-
 def user_respond_to_ticket():
     print("Responding to ticket...")
     ticket_id = int(input("What is the ticket ID? "))
@@ -117,6 +116,29 @@ def check_open_tickets():
     for ticket in Tickets.all_tickets:
         if ticket.status == "Open":
             print(ticket)
+def show_ticket_dashboard():
+    total_tickets = len(Tickets.all_tickets)
+    total_tickets_to_resolve = 0
+    total_tickets_resolved = 0
+    total_tickets_with_no_response = 0
+    
+    for ticket in Tickets.all_tickets:
+        if ticket.status in ["Open", "In progress", "Awaiting customer response"]:
+            total_tickets_to_resolve += 1
+        elif ticket.status == "Resolved":
+            total_tickets_resolved += 1
+        if not ticket.user_responses:
+            total_tickets_with_no_response += 1
+    
+    print(f"Ticket Statistics \nTickets created: {total_tickets} \nTickets not resolved: {total_tickets_to_resolve} \nTickets resolved: {total_tickets_resolved}\n Total tickets with no response {total_tickets_with_no_response}")
+    print("Do you want to see the list of tickets?")
+    see_all_tickets = input("Y or N").lower()
+    
+    if see_all_tickets == "y":
+        for ticket in Tickets.all_tickets:
+            print(ticket)
+        
+    
 
 def main():
     while True:
@@ -172,13 +194,11 @@ def main():
                     update_ticket()
 
                 if user_input == "4":
-                    user_respond_to_ticket()
+                    show_ticket_dashboard()
 
-                if user_input == "help":
-                    print("Please select one of the following options: \n0: Log out \n1: Submit helpdesk ticket \n2: Show all tickets \n3: Respond to ticket \n4: Re-open resolved ticket \n5: Show ticket statistics")
 
                 else:
-                    print("Please select a number from one of the options above. If you would like a reminder, please type 'help'")
+                    print("Please select a number from one of the options above")
 
 
 main()
