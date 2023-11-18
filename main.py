@@ -9,7 +9,8 @@ class Tickets:
         self.description = description
         self.status = "Open"
         self.ticketID = Tickets.ticket_counter
-        self.responses = []
+        self.user_responses = []
+        self.it_responses = []
         Tickets.ticket_counter += 1
         Tickets.all_tickets.append(self)
         
