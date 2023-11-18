@@ -25,6 +25,13 @@ def submit_ticket():
         new_ticket.name, new_ticket.email, new_ticket.staffID, new_ticket.description
     ))
     print("Ticket submitted successfully.")
+    
+def show_all_tickets():
+    print("Showing all tickets...")
+    for ticket in Tickets.all_tickets:
+        print("Ticket ID: {}\nName: {}\nEmail: {}\nStaff ID: {}\nDescription: {}\nStatus: {}\n".format(
+            ticket.ticketID, ticket.name, ticket.email, ticket.staffID, ticket.description, ticket.status
+        ))
 print("Please select one of the following options: \n0: Exit \n1: Submit helpdesk ticket \n2: Show all tickets \n3: Respond to ticket \n4: Re-open resolved ticket \n5: Show ticket statistics")
 
 user_input = input("What would you like to do? ")
