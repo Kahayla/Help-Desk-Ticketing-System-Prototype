@@ -9,6 +9,7 @@ class Tickets:
         self.description = description
         self.status = "Open"
         self.ticketID = Tickets.ticket_counter
+        self.responses = []
         Tickets.ticket_counter += 1
         Tickets.all_tickets.append(self)
         
@@ -36,6 +37,22 @@ def show_all_tickets():
     for ticket in Tickets.all_tickets:
         print(ticket)
         
+def respond_to_ticket():
+    print("Responding to ticket...")
+    ticket_id = int(input("What is the ticket ID? "))
+    response = input("What is your response? ")
+    for ticket in Tickets.all_tickets:
+        if ticket.ticketID == ticket_id:
+            ticket.responses.append(response)
+            print("Response added successfully.")
+            print("Ticket Summary - \nName: {}\nEmail: {}\nStaff ID: {}\nDescription: {}\nResponses: {}".format(
+                ticket.name, ticket.email, ticket.staffID, ticket.description, ticket.responses
+            ))
+            break
+    else:
+        print("Ticket" + ticket_id + "does not exist.")
+    
+        
 while True:
     print("Please select one of the following options: \n0: Exit \n1: Submit helpdesk ticket \n2: Show all tickets \n3: Respond to ticket \n4: Re-open resolved ticket \n5: Show ticket statistics")
 
@@ -51,11 +68,10 @@ while True:
         submit_ticket()
 
     if user_input == "2":
-        print("Getting all tickets...")
-        print(Tickets.all_tickets)
+        show_all_tickets()
 
     if user_input == "3":
-        print("Responding to ticket...")
+        respond_to_ticket()
         
     if user_input == "4":
         print("Re-opening resolved ticket...")
