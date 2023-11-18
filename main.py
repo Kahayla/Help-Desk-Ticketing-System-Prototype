@@ -35,7 +35,8 @@ def submit_ticket(staffID):
 def show_all_tickets(staffID):
     print("Showing all tickets...")
     for ticket in Tickets.all_tickets:
-        print(ticket)
+        if ticket.staffID == staffID:
+            print(ticket)
         
 def user_respond_to_ticket():
     print("Responding to ticket...")
@@ -51,39 +52,50 @@ def user_respond_to_ticket():
             break
     else:
         print("Ticket" + ticket_id + "does not exist.")
-    
 
-role = input("Please type select role you are: \n1: User  \n2: IT team member \nWhat role are you?")
-staff_id = input("What is your staff_id?")
-if role == "1":     
+
+
+def main():
     while True:
-        print("Please select one of the following options: \n0: Exit \n1: Submit helpdesk ticket \n2: Show all tickets \n3: Respond to ticket \n4: Re-open resolved ticket \n5: Show ticket statistics")
+        role = None
+        staff_id = None
+        print(f"Role: {role}, Staff ID: {staff_id}")
+        print("LOG IN")
+        role = input("Please type select role you are: \n1: User  \n2: IT team member \nWhat role are you?")
+        staff_id = input("What is your staff_id?")
 
-        user_input = input("What would you like to do? ")
+        if role == "1":
+            while True:
+                print("Please select one of the following options: \n0: Log out \n1: Submit helpdesk ticket \n2: Show all tickets \n3: Respond to ticket \n4: Re-open resolved ticket \n5: Show ticket statistics")
 
-        if user_input == "0":
-            print("Exiting...")
-            quit()
+                user_input = input("What would you like to do? ")
 
-        if user_input == "1":
-            submit_ticket(staff_id)
+                if user_input == "0":
+                    print("Logging out...")
+                    break
 
-        if user_input == "2":
-            show_all_tickets(staff_id)
+                if user_input == "1":
+                    submit_ticket(staff_id)
 
-        if user_input == "3":
-            user_respond_to_ticket()
-            
-        if user_input == "4":
-            print("Re-opening resolved ticket...")
-            
-        if user_input == "5":
-            print("Showing ticket statistics...")
+                if user_input == "2":
+                    show_all_tickets(staff_id)
 
-        if user_input == "help":
-            print("Please select one of the following options: \n0: Exit \n1: Submit helpdesk ticket \n2: Show all tickets \n3: Respond to ticket \n4: Re-open resolved ticket \n5: Show ticket statistics")
-            
-        else :
-            print("Please select a number from one of options above if you would like reminder please type 'help'")
-elif role == "2":
-    print("IT member")
+                if user_input == "3":
+                    user_respond_to_ticket()
+
+                if user_input == "4":
+                    print("Re-opening resolved ticket...")
+
+                if user_input == "5":
+                    print("Showing ticket statistics...")
+
+                if user_input == "help":
+                    print("Please select one of the following options: \n0: Log out \n1: Submit helpdesk ticket \n2: Show all tickets \n3: Respond to ticket \n4: Re-open resolved ticket \n5: Show ticket statistics")
+
+                else:
+                    print("Please select a number from one of the options above. If you would like a reminder, please type 'help'")
+
+        elif role == "2":
+            print("IT member")
+
+main()
