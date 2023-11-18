@@ -45,9 +45,13 @@ def show_all_tickets_created_by_user(staffID):
         if ticket.staffID == staffID:
             print("Ticket ID:", ticket.ticketID)
             print("Description:", ticket.description)
+            
+            if not ticket.user_responses:
+                print("Responses: No response yet")
+            else:
+                print("Responses:", ticket.user_responses)
+            
             print("Status:", ticket.status)
-            print("Responses:", ticket.user_responses)
-           
 
 def update_ticket():
     ticket_id = int(input("What is the ID of the ticket you would like to update? "))
