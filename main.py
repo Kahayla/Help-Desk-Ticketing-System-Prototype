@@ -15,7 +15,7 @@ class Tickets:
         Tickets.all_tickets.append(self)
         
     def __str__(self):
-        return f"Ticket ID: {self.ticketID}\nName: {self.name}\nEmail: {self.email}\nStaff ID: {self.staffID}\nDescription: {self.description}\nStatus: {self.status}\n"
+        return f"Ticket ID: {self.ticketID}\nName: {self.name}\nEmail: {self.email}\nStaff ID: {self.staffID}\nDescription: {self.description}\nStatus: {self.status}\nUser Responses: {self.user_responses}\n"
     
     def __repr__(self):
         return self.__str__()
@@ -25,32 +25,25 @@ def submit_ticket(staffID):
     name = input("What is your name? ")
     email = input("What is your email? ")
     description = input("Please describe your issue: ")
-    
+
     new_ticket = Tickets(name, email, staffID, description)
     print("Ticket Summary - \nName: {}\nEmail: {}\nStaff ID: {}\nDescription: {}".format(
         new_ticket.name, new_ticket.email, new_ticket.staffID, new_ticket.description
     ))
     print("Ticket submitted successfully.")
 
-# def password_change(staffID,name,description):
-#     if "password change" in description.lower():
-#         new_password = staffID[:2]+name[:3]
+    if "password change" in description.lower():
+        new_password = staffID[:2] + name[:3]
+        response = "Here is your new password: " + new_password
+        new_ticket.user_responses.append(response)
+        new_ticket.status = "Resolved"
 
-def password_change(ticketID,staffID,name):
-    for ticket in Tickets:
-        if ticket.ticketID == ticketID and "password change" in ticket.description.lower() :
-            new_password = staffID[:2]+name[:3]
-            response = "Here is your new password: " + new_password
-            ticket.user_responses.append(response)
-            ticket.status = "Resolved"
-    
-    
 def show_all_tickets(staffID):
     print("Showing all tickets...")
     for ticket in Tickets.all_tickets:
         if ticket.staffID == staffID:
             print(ticket)
-        
+
 def user_respond_to_ticket():
     print("Responding to ticket...")
     ticket_id = int(input("What is the ticket ID? "))
@@ -64,13 +57,11 @@ def user_respond_to_ticket():
             ))
             break
     else:
-        print("Ticket" + ticket_id + "does not exist.")
-
+        print(f"Ticket {ticket_id} does not exist.")
 
 
 def main():
     while True:
-
         role = None
         staff_id = None
         print(f"Role: {role}, Staff ID: {staff_id}")
@@ -105,5 +96,6 @@ def main():
 
         elif role == "2":
             print("IT member")
+
 
 main()
