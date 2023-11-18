@@ -15,7 +15,7 @@ class Tickets:
         Tickets.all_tickets.append(self)
 
     def __str__(self):
-        return f"Ticket ID: {self.ticketID}\nName: {self.name}\nEmail: {self.email}\nStaff ID: {self.staffID}\nDescription: {self.description}\nStatus: {self.status}\nUser Responses: {self.user_responses}\n"
+        return f"Ticket ID: {self.ticketID}\nName: {self.name}\nEmail: {self.email}\nStaff ID: {self.staffID}\nDescription: {self.description}\nStatus: {self.status}\nUser Responses: {self.user_responses}\nInternal Responses: {self.internal_responses}"
 
     def __repr__(self):
         return self.__str__()
@@ -39,11 +39,15 @@ def submit_ticket(staffID):
         new_ticket.user_responses.append(response)
         new_ticket.status = "Resolved"
 
-def show_all_tickets(staffID):
+def show_all_tickets_created_by_user(staffID):
     print("Showing all tickets...")
     for ticket in Tickets.all_tickets:
         if ticket.staffID == staffID:
-            print(ticket)
+            print("Ticket ID:", ticket.ticketID)
+            print("Description:", ticket.description)
+            print("Status:", ticket.status)
+            print("Responses:", ticket.user_responses)
+           
 
 def update_ticket():
     ticket_id = int(input("What is the ID of the ticket you would like to update? "))
@@ -66,13 +70,13 @@ def update_ticket():
                 print("Ticket statuses\n1: Open\n2: In progress\n3: Awaiting customer response\n4: Resolved")
                 change_status_to = int(input("Select the number to update the ticket status: "))
                 
-                if change_status_to == 1:
+                if change_status_to == "1":
                     ticket.status = "Open"
-                elif change_status_to == 2:
+                elif change_status_to == "2":
                     ticket.status = "In progress"
-                elif change_status_to == 3:
+                elif change_status_to == "3":
                     ticket.status = "Awaiting customer response"
-                elif change_status_to == 4:
+                elif change_status_to == "4": 
                     ticket.status = "Resolved"
                 else:
                     print("Invalid status selection.")
@@ -83,7 +87,9 @@ def update_ticket():
             break
     else:
         print(f"Ticket with ID {ticket_id} not found.")
-
+def show_all_tickets():
+    for ticket in Tickets.all_tickets:
+        print(ticket)
     
     
 
@@ -131,7 +137,7 @@ def main():
                     submit_ticket(staff_id)
 
                 if user_input == "2":
-                    show_all_tickets(staff_id)
+                    show_all_tickets_created_by_user(staff_id)
 
                 if user_input == "3":
                     user_respond_to_ticket()
@@ -144,7 +150,7 @@ def main():
 
         elif role == "2":
             while True:
-                print("Please select one of the following options: \n0: Log out \n1: Check all Open tickets \n2: Update ticket \n3: Go to ticket dashboard")
+                print("Please select one of the following options: \n0: Log out \n1: Check all Open tickets \n2: Check all tickets\n3: Update ticket \n4: Go to ticket dashboard")
 
                 user_input = input("What would you like to do? ")
 
@@ -156,9 +162,12 @@ def main():
                     check_open_tickets()
 
                 if user_input == "2":
+                    show_all_tickets()
+                    
+                if user_input == "3":
                     update_ticket()
 
-                if user_input == "3":
+                if user_input == "4":
                     user_respond_to_ticket()
 
                 if user_input == "help":
