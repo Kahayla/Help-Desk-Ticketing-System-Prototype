@@ -20,11 +20,10 @@ class Tickets:
     def __repr__(self):
         return self.__str__()
 
-def submit_ticket():
+def submit_ticket(staffID):
     print("Submit a ticket")
     name = input("What is your name? ")
     email = input("What is your email? ")
-    staffID = input("What is your staff ID? ")
     description = input("Please describe your issue: ")
     
     new_ticket = Tickets(name, email, staffID, description)
@@ -33,7 +32,7 @@ def submit_ticket():
     ))
     print("Ticket submitted successfully.")
     
-def show_all_tickets():
+def show_all_tickets(staffID):
     print("Showing all tickets...")
     for ticket in Tickets.all_tickets:
         print(ticket)
@@ -55,6 +54,7 @@ def user_respond_to_ticket():
     
 
 role = input("Please type select role you are: \n1: User  \n2: IT team member \nWhat role are you?")
+staff_id = input("What is your staff_id?")
 if role == "1":     
     while True:
         print("Please select one of the following options: \n0: Exit \n1: Submit helpdesk ticket \n2: Show all tickets \n3: Respond to ticket \n4: Re-open resolved ticket \n5: Show ticket statistics")
@@ -66,10 +66,10 @@ if role == "1":
             quit()
 
         if user_input == "1":
-            submit_ticket()
+            submit_ticket(staff_id)
 
         if user_input == "2":
-            show_all_tickets()
+            show_all_tickets(staff_id)
 
         if user_input == "3":
             user_respond_to_ticket()
