@@ -7,16 +7,22 @@ This Python script implements a Help Desk Ticketing System prototype. Below are 
 - **Submit a Ticket:**
   - Users can submit a helpdesk ticket by providing their staff ID, name, email, and describing the issue.
   - If the issue involves a password change, the system automatically generates a new password.
+
 - **Show All Tickets Created by User:**
   - Displays all tickets created by the currently logged-in user.
+
 - **Update Ticket:**
   - Allows IT team members to update ticket details, add responses, and change the ticket status.
+
 - **Respond to Ticket:**
   - Enables users to respond to a ticket, adding their comments.
+
 - **Check Open Tickets:**
   - IT team members can view all open tickets.
+
 - **Show All Tickets:**
   - Displays details of all tickets in the system.
+
 - **Show Ticket Dashboard:**
   - Provides statistics on the total number of tickets, unresolved tickets resolved tickets, and tickets with no response.
 
@@ -38,20 +44,31 @@ This Python script implements a Help Desk Ticketing System prototype. Below are 
 1. **Login:**
    - When prompted, select your role (_type 1 for User, 2 for IT team member_).
    - Eneter your staffID, name, and email.
+
+
 2. **User Options:**
    - Users (Role 1) can do the following:
      - Type `0` to log out of system
+   
      - Type `1` to submit new helpdesk ticket
+
        - This prompt asks you to then provide a description of the issue.
        - If your tciket description contains one of the password change options/keyphrases, a new password will be automatically generated for you.
+
      - Type `2` to show all tickets you have submitted.
+
      - Type `3` to respond to a specifc ticket
        - This prompt will ask you to then enter the Ticket ID and provide a response.
+
+
 3. **IT team member Options**
    - IT team members (Role 2) can do the following:
      - Type `0` to log out of system
+
      - Type `1` to check all open tickets
+
      - Type `2` to check all tickets
+
      - Type `3` to update a ticket
        - This prompt asks you to provide the Ticket ID that you would like to update
        - The app will then ask you to choose a response type:
@@ -64,6 +81,7 @@ This Python script implements a Help Desk Ticketing System prototype. Below are 
          - 3: Awaiting customer response
          - 4: Resolved
        - If `N` then the app will prompt you with the IT team member options list.
+
    - Type `4` to go to ticket dashboard
      - This will then display the tciket statistics to you
      - Example:
