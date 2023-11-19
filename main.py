@@ -3,7 +3,7 @@ class Tickets:
     all_tickets = []
     ticket_counter = 2000
 
-#creating attributes/schema for each ticket in the all_tickets array 
+# creating attributes/schema for each ticket in the all_tickets array 
     def __init__(self, name, email, staffID, description):
         self.name = name
         self.email = email
@@ -16,7 +16,7 @@ class Tickets:
         Tickets.ticket_counter += 1
         Tickets.all_tickets.append(self)
 
-#some fancy stringify function to make tickets readable in the console
+# some fancy stringify function to make tickets readable in the console
     def __str__(self):
         return f"Ticket ID: {self.ticketID}\nName: {self.name}\nEmail: {self.email}\nStaff ID: {self.staffID}\nDescription: {self.description}\nStatus: {self.status}\nUser Responses: {self.user_responses}\nInternal Responses: {self.internal_responses}"
 
