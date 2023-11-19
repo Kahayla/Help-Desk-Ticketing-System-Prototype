@@ -180,7 +180,7 @@ def main():
 
         elif role == "2":
             while True:
-                print("\nPlease select one of the following options: \n0: Log out \n1: Check all Open tickets \n2: Check all tickets\n3: Update ticket \n4: Go to ticket dashboard\n")
+                print("\n----------------------\nPlease select one of the following options: \n0: Log out \n1: Check all Open tickets \n2: Check all tickets\n3: Update ticket \n4: Go to ticket dashboard\n")
 
                 user_input = input("What would you like to do? ")
 
