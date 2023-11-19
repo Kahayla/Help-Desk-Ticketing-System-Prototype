@@ -33,13 +33,18 @@ def submit_ticket(staffID, name, email):
         new_ticket.name, new_ticket.email, new_ticket.staffID, new_ticket.description
     ))
     print("Ticket submitted successfully.\n")
-    # check if ticket contains the string "passsword change"
-    if "password change" in description.lower():
-        new_password = staffID[:2] + name[:3]
-        response = "Here is your new password: " + new_password
-        new_ticket.user_responses.append(response)
-        new_ticket.status = "Resolved"
-        
+    # check if ticket is for a password change
+    # declaring array of acceptable key phrases for a password change
+    password_change_options = ["change password", "change my password", "password changed", "forgot my password", "forgot password", "new password", "forgotten password", "update password", "password change"]
+    #loop through each key phrase and check if the ticket description contains one of these strings
+    for key_phrase in password_change_options:
+        if key_phrase in description.lower():
+            new_password = staffID[:2] + name[:3]
+            response = "Here is your new password: " + new_password
+            new_ticket.user_responses.append(response)
+            new_ticket.status = "Resolved"
+            print(f"{new_ticket.user_responses[-1]}\n")
+            
 # displays all tickets that were created by the currently logged in user - if the staffID on a ticket matches staff_id of current user then print else skip
 def show_all_tickets_created_by_user(staff_id):
     print("\nShowing all tickets...\n")
