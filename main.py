@@ -66,12 +66,12 @@ def update_ticket():
             elif response_type == 2:
                 ticket.user_responses.append(new_response)
 
-            print("Response added successfully.")
+            print("\nResponse added successfully.\n")
 
-            update_status = input("Do you wish to update the ticket status? (Y or N): ").lower()
+            update_status = input("\nDo you wish to update the ticket status? (Y or N): ").lower()
             
             if update_status == "y":
-                print("Ticket statuses\n1: Open\n2: In progress\n3: Awaiting customer response\n4: Resolved")
+                print("\nTicket statuses\n1: Open\n2: In progress\n3: Awaiting customer response\n4: Resolved\n")
                 change_status_to = int(input("Select the number to update the ticket status: "))
                 
                 if change_status_to == 1:
@@ -83,18 +83,18 @@ def update_ticket():
                 elif change_status_to == 4: 
                     ticket.status = "Resolved"
                 else:
-                    print("Invalid status selection.")
+                    print("\nInvalid status selection.")
 
-                print("Ticket status updated successfully.")
+                print("\nTicket status updated successfully.")
 
-            print(ticket)
+            print(f"\n{ticket}")
             break
     else:
-        print(f"Ticket with ID {ticket_id} not found.")
+        print(f"\nTicket with ID {ticket_id} not found.")
         
 def show_all_tickets():
     for ticket in Tickets.all_tickets:
-        print(f"{ticket}\n")
+        print(f"\n{ticket}")
     
 def user_respond_to_ticket():
     print("\nResponding to ticket...")
